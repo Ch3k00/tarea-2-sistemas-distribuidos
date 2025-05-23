@@ -1,4 +1,4 @@
-module github.com/Ch3k00/tarea-2-sd
+module tarea-2-sd
 
 go 1.24.2
 

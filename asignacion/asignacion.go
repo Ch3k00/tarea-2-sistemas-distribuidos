@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	emergenciaspb "github.com/Ch3k00/tarea-2-sd/proto/emergenciaspb"
+	emergenciaspb "tarea-2-sd/proto/emergenciaspb"
 
 	"google.golang.org/grpc"
 )
