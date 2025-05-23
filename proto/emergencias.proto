@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package emergencias;
+option go_package = "proto/emergenciaspb";
+
+// ---------- MENSAJES ----------
+
+message Emergencia {
+  string name = 1;
+  int32 latitude = 2;
+  int32 longitude = 3;
+  int32 magnitude = 4;
+}
+
+message EmergenciasRequest {
+  repeated Emergencia emergencias = 1;
+}
+
+message Empty {}
+
+message Actualizacion {
+  string mensaje = 1;
+}
+
+// ---------- SERVICIOS ----------
+
+service ServicioAsignacion {
+  rpc EnviarEmergencias(EmergenciasRequest) returns (Empty);
+}
+
+service ServicioDrones {
+  rpc AsignarEmergencia(Emergencia) returns (Empty);
+}
+
+service ServicioMonitoreo {
+  rpc EnviarActualizacion(Actualizacion) returns (Empty);
+}
