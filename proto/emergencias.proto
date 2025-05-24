@@ -1,7 +1,10 @@
 syntax = "proto3";
 
 package emergencias;
-option go_package = "proto/emergenciaspb";
+
+option go_package = "/proto/emergenciaspb";
+
+import "google/protobuf/empty.proto";
 
 // ---------- MENSAJES ----------
 
@@ -10,13 +13,13 @@ message Emergencia {
   int32 latitude = 2;
   int32 longitude = 3;
   int32 magnitude = 4;
+  string dron_id = 5;
+
 }
 
 message EmergenciasRequest {
   repeated Emergencia emergencias = 1;
 }
-
-message Empty {}
 
 message Actualizacion {
   string mensaje = 1;
@@ -25,13 +28,16 @@ message Actualizacion {
 // ---------- SERVICIOS ----------
 
 service ServicioAsignacion {
-  rpc EnviarEmergencias(EmergenciasRequest) returns (Empty);
+  rpc EnviarEmergencias(EmergenciasRequest) returns (google.protobuf.Empty);
 }
 
 service ServicioDrones {
-  rpc AsignarEmergencia(Emergencia) returns (Empty);
+  rpc AsignarEmergencia(Emergencia) returns (google.protobuf.Empty);
 }
 
 service ServicioMonitoreo {
-  rpc EnviarActualizacion(Actualizacion) returns (Empty);
+  rpc EnviarActualizacion(Actualizacion) returns (google.protobuf.Empty);
+  rpc RecibirActualizaciones(google.protobuf.Empty) returns (stream Actualizacion);
+
 }
+
